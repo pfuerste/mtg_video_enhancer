@@ -16,7 +16,7 @@ def test_constructor_sets_name():
     assert black_lotus.color == "C"
     assert black_lotus.type == "artifact"
     assert black_lotus.cmc == 0
-    assert black_lotus.subtype == None
-    assert black_lotus.attack == None
-    assert black_lotus.toughness == None
-    assert black_lotus.loyality == None
+    assert black_lotus.subtype is None
+    assert black_lotus.attack is None
+    assert black_lotus.toughness is None
+    assert black_lotus.loyality is None
