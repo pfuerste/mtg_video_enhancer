@@ -1,4 +1,5 @@
-from card import Card
+from .card import Card
+from mtg_video_enhancer.classification.metrics import Metrics
 
 
 def test_constructor_sets_name():
@@ -22,3 +23,7 @@ def test_constructor_sets_name():
     assert black_lotus.attack is None
     assert black_lotus.toughness is None
     assert black_lotus.loyality is None
+
+
+def test_lower_imports():
+    Metrics()
