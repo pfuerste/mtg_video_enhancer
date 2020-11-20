@@ -1,0 +1,5 @@
+#.gitignore
+.pytest*
+*__pycache__*
+/.vscode
+

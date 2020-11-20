@@ -12,6 +12,8 @@ def test_constructor_sets_name():
         toughness=None,
         loyality=None,
     )
+
+    # So ausführlich müssen solche Basics imo nicht getestet werden.
     assert black_lotus.name == "Black Lotus"
     assert black_lotus.color == "C"
     assert black_lotus.type == "artifact"
