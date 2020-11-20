@@ -1,3 +1,4 @@
+# Brauchen wir diese Klasse? Hier bestimmt nicht.
 class Card:
     def __init__(
         self, name, color, type, cmc, subtype, attack, toughness, loyality

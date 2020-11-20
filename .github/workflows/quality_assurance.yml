@@ -20,4 +20,4 @@ jobs:
         pip install -r requirements.txt
     - name: Run pytest on the repository
       run: |
-        pytest .
+        pytest tests
