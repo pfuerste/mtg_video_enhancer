@@ -2,6 +2,6 @@
 .pytest*
 *__pycache__*
 /.vscode
-
+*.json
 # Hier sollten auch die synth-files stehen, 
 # die zu tracken wäre zu viel
