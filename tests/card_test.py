@@ -1,5 +1,5 @@
 from .card import Card
-from mtg_video_enhancer.mtg_video_enhancer.classification.metrics import Metrics
+from mtg_video_enhancer.classification.metrics import Metrics
 
 
 def test_constructor_sets_name():

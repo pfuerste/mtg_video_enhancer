@@ -1,4 +1,4 @@
-import mtg_video_enhancer.mtg_video_enhancer.utils.db_parser
+import mtg_video_enhancer.utils.db_parser
 
 
 # dunno how to test here
