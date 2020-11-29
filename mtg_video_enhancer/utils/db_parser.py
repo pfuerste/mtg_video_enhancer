@@ -64,7 +64,7 @@ def get_faulty_cards(json_path: str) -> list:
     return faulty_cards
 
 
-# Return all card names which fulfill criteria
+# Return all card names which are in a format
 def filter_by_format(json_path: str, keys: list) -> list:
     file = open(json_path, "r")
     j = json.load(file)
@@ -72,9 +72,21 @@ def filter_by_format(json_path: str, keys: list) -> list:
     filtered_cards = list()
     for card in cards:
         for key in keys:
-            if key in ['standard', 'future', 'historic', 'pioneer',
-                       'modern', 'legacy', 'pauper', 'vintage',
-                       'penny', 'commander', 'brawl', 'duel', 'oldschool']:
+            if key in [
+                "standard",
+                "future",
+                "historic",
+                "pioneer",
+                "modern",
+                "legacy",
+                "pauper",
+                "vintage",
+                "penny",
+                "commander",
+                "brawl",
+                "duel",
+                "oldschool",
+            ]:
                 if card["legalities"][key] == "legal":
                     # if card not in filtered_cards:
                     filtered_cards.append(card)
@@ -107,23 +119,26 @@ def filter_keys(card_list: list, keys: list) -> list:
 
 
 def download_card_imgs(names_and_urls: list, img_dir: str):
+    if not os.path.isdir(img_dir):
+        os.makedirs(img_dir)
     print(f"Starting download of {len(names_and_urls)} images to {img_dir}.")
     for card in tqdm(names_and_urls):
-        path = os.path.join(img_dir, card["name"])+".jpg"
+        name = card["name"]
+        if "/" in name:
+            name = name.replace("/", "_")
+        if "//" in name:
+            name = name.replace("//", "_")
+        path = os.path.join(img_dir, name) + ".jpg"
         url = card["image_uris"]
-        urllib.request.urlretrieve(url, path)
-        #print(f"to {path} from {url}")
+        if not os.path.isfile(path):
+            urllib.request.urlretrieve(url, path)
     print("Finished.")
 
 
 if __name__ == "__main__":
     path = "/mnt/c/Users/phili/_Documents/Projects/mtg_video_enhancer/oracle-cards-20201122100602.json"
-    img_dir = "/mnt/c/Users/phili/_Documents/Projects/mtg_video_enhancer/card_imgs"
-    #keys = get_keys(path)
-    #vals = get_values(path, ["legalities"])
-    #print(sorted(keys))
-    #print(vals)
-    modern_cards = filter_by_format(path, ["modern"])
+    img_dir = "/mnt/c/Users/phili/Documents/card_imgs/historic"
+
+    modern_cards = filter_by_format(path, ["historic"])
     modern_names_urls = filter_keys(modern_cards, ["name", ["image_uris", "normal"]])
     download_card_imgs(modern_names_urls, img_dir)
-    #print(len(modern_cards))
