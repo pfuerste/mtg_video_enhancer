@@ -31,8 +31,8 @@ def create_img(bg_path: np.array, card_path: list,
         w_blend = int(card_img.shape[0]/2)
         
         out_img = cv.seamlessClone(card_img, img, mask,
-                              (h_blend, w_blend), cv.NORMAL_CLONE)
-    cv.imwrite(os.path.join(out_dir, "1.jpg"), out_img)
+                              (h_blend, w_blend), cv.MONOCHROME_TRANSFER)
+    cv.imwrite(os.path.join(out_dir, "3.jpg"), out_img)
 
 
 if __name__ == "__main__":
