@@ -3,5 +3,6 @@
 *__pycache__*
 /.vscode
 *.json
+*synth_data/*.jpg
 # Hier sollten auch die synth-files stehen, 
 # die zu tracken wäre zu viel
