@@ -15,6 +15,17 @@ def get_random_imgs(img_dir: str, num: int) -> list:
 
 # def write_gt(, annot_csv: str):
 
+# TODO make min & max size scale with img
+def resize_card(card_img: np.array, img: np.array, min_card_w: int = 200,
+                max_card_w: int = 488) -> np.array:
+    card_w = np.random.randint(min_card_w, max_card_w)
+    # TODO this factor is right for downloaded cards of the NORMAL size,
+    # may need to be adjusted (global settings, Flags?)
+    card_h = int(card_w*(680/488))
+    # HERE its h, w?!
+    card_img = cv.resize(src=card_img, dsize=(card_w, card_h))
+    return card_img
+
 
 def add_random_pertubations(
     card_img: np.array,
@@ -38,6 +49,7 @@ def add_random_pertubations(
         # set matrix
         pass
     card_img = add_gaussian_noise(card_img, gauss_var)
+    # TODO add Rotation
     return card_img, perspective_matrix
 
 
@@ -50,13 +62,14 @@ def add_gaussian_noise(card_img, gauss_var) -> np.array:
 
 def add_reflection(card_img: np.array, refl_img: np.array) -> np.array:
     card_h, card_w = card_img.shape[:2]
+    # TODO change according to card size
     min_refl_size = 50
     upper_left = (
         np.random.randint(0, card_h - min_refl_size),
         np.random.randint(0, card_w - min_refl_size),
     )
     max_refl_size = np.subtract((card_h, card_w), upper_left)
-    # resize needs (w, h)
+    # resize needs (w, h)?!
     refl_size = (
         np.random.randint(min_refl_size - 1, max_refl_size[1]),
         np.random.randint(min_refl_size - 1, max_refl_size[0]),
@@ -97,6 +110,7 @@ def create_img(bg_path: str, card_paths: list, annot_csv: str, out_dir: str):
         # TODO (weiße?) Ecken abschneiden (wie?)
         # TODO change card size
         card_img = cv.imread(card)
+        card_img = resize_card(card_img, img)
         card_img, perspective_matrix = add_random_pertubations(
             card_img=card_img
         )
